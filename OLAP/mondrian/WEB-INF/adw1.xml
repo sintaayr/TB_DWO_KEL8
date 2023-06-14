@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Schema name="fp_adventureworks3">
+
+<Cube name="SpecialOfferRevenue" defaultMeasure="Revenue">
+  
+  <Table name="fact_table"/>
+
+  <Dimension name="SpecialOffer" foreignKey = "SpecialOfferID">
+    <Hierarchy hasAll="true" allMemberName="All SpecialOffer" primaryKey ="SpecialOfferID">
+      <Table name="SpecialOffer" />
+      <Level name="SpecialOfferID" column="SpecialOfferID"/>
+      <Level name="Description" column="Description" />
+      <Level name="DiscountPct" column="DiscountPct" />
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="SalesOrder" foreignKey = "SalesOrderID">
+    <Hierarchy hasAll="true" allMemberName="All SalesOrder" primaryKey ="SalesOrderID">
+      <Table name="SalesOrder" />
+      <Level name="SalesOrderID" column="SalesOrderID"/>
+      <Level name="SalesOrderNumber" column="SalesOrderNumber" />
+    </Hierarchy>
+  </Dimension>
+
+   <Dimension name="Customer" foreignKey = "CustomerID">
+    <Hierarchy hasAll="true" allMemberName="All Customer" primaryKey ="CustomerID">
+      <Table name="Customer" />
+      <Level name="CustomerID" column="CustomerID"/>
+      <Level name="AccountNumber" column="AccountNumber" />
+    </Hierarchy>
+</Dimension>
+
+<Dimension name="Product" foreignKey = "ProductID">
+    <Hierarchy hasAll="true" allMemberName="All Product" primaryKey ="ProductID">
+      <Table name="Product" />
+      <Level name="ProductID" column="ProductID"/>
+      <Level name="ProductName" column="ProductName" />
+    </Hierarchy>
+  </Dimension>
+
+  <Measure name="Revenue" column="Revenue" aggregator="sum"
+      formatString="Standard"/>
+  
+</Cube>
+
+
+
+</Schema>

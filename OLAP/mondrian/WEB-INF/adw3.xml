@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<Schema name="fp_adventureworks2">
+
+<Cube name="penjualan" defaultMeasure="TotalPenjualan">
+  
+  <Table name="fakta_kotaterlaris"/>
+
+  <Dimension name="customer" foreignKey ="CustomerID">
+      <Hierarchy hasAll="true" allMemberName="All customer" primaryKey ="CustomerID">
+      <Table name="customer"/>
+      <Level name="CustomerID" column="CustomerID"/>
+      <Level name="AccountNumber" column="AccountNumber"/>
+      </Hierarchy>
+      
+  </Dimension>
+
+  <Dimension name="salesterritory" foreignKey="TerritoryID">
+    <Hierarchy hasAll="true" allMemberName="All salesterritory" primaryKey="TerritoryID">
+      <Table name="salesterritory" />
+      <Level name="TerritoryID" column="TerritoryID"/>
+      <Level name="Name" column="Name"/>
+    </Hierarchy>
+   
+  </Dimension>
+
+  <Dimension name="salesorderheader" foreignKey="SalesOrderID">
+    <Hierarchy  hasAll  ="true" allMemberName="All salesorderheader" primaryKey  = "SalesOrderID">
+        <Table name="salesorderheader"/>
+        <Level name="SalesOrderID" column="SalesOrderID"/>
+        <Level name="OrderDate" column="OrderDate"/>
+        <Level name="SubTotal" column="SubTotal"/>
+    </Hierarchy>
+  </Dimension>
+  
+  <Measure name="TotalPenjualan" column="TotalPenjualan" aggregator="sum"
+      formatString="Standard"/>
+  
+</Cube>
+
+</Schema>

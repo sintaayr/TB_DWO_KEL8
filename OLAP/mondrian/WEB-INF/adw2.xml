@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Schema name="fp_adventureworks">
+
+<Cube name="bestsellingproduct" defaultMeasure="total_penjualan">
+  
+  <Table name="ft_bestsellingproduct"/>
+
+  <Dimension name="salesorderdetail" foreignKey = "salesorder_id">
+    <Hierarchy hasAll="true" allMemberName="All salesorderdetail" primaryKey ="salesorder_id">
+      <Table name="salesorderdetail" />
+      <Level name="salesorder_id" column="salesorder_id"/>
+      <Level name="salesordeerdetailid" column="salesorderdetail_id"/>
+      <Level name="line_total" column="line_total" />
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="product" foreignKey = "product_id">
+    <Hierarchy hasAll="true" allMemberName="All product" primaryKey ="product_id">
+      <Table name="product" />
+      <Level name="product_id" column="product_id"/>
+      <Level name="name" column="name" />
+    </Hierarchy>
+  </Dimension>
+
+   <Dimension name="productsubcategory" foreignKey = "productsubcategory_id">
+    <Hierarchy hasAll="true" allMemberName="All productsubcategory" primaryKey ="productsubcategory_id">
+      <Table name="productsubcategory" />
+      <Level name="productsubcategory_id" column="productsubcategory_id"/>
+      <Level name="name" column="name" />
+    </Hierarchy>
+</Dimension>
+
+  <Measure name="total_penjualan" column="total_penjualan" aggregator="sum"
+      formatString="Standard"/>
+</Cube>
+</Schema>
